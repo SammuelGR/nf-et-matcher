@@ -1,0 +1,19 @@
+{
+  "generalConfiguration": {
+    "sortOnBeforeSave": true
+  },
+  "importStringConfiguration": {
+    "hasSemicolon": true,
+    "numberOfEmptyLinesAfterAllImports": 1,
+    "quoteMark": "single"
+  },
+  "sortConfiguration": {
+    "customOrderingRules": {
+      "defaultOrderLevel": 20,
+      "defaultNumberOfEmptyLinesAfterGroup": 1,
+      "rules": []
+    },
+    "removeUnusedImports": true,
+    "joinImportPaths": true
+  }
+}
