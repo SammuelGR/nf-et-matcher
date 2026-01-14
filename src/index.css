@@ -2,35 +2,48 @@
 
 @import 'tailwindcss';
 
-:root {
-  background-color: #0a0a0a;
-  color-scheme: dark;
-  color: rgba(255, 255, 255, 0.87);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+@layer base {
+  :root {
+    --background: 240 10% 6%;
+    --foreground: 180 10% 95%;
+    --highlight-foreground: 240 10% 6%;
+    --highlight: 142 80% 50%;
+    --muted-foreground: 240 5% 60%;
+    --muted: 240 10% 15%;
+    --primary: 180 10% 95%;
+    --secondary: 240 5% 60%;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-background text-secondary antialiased font-sans;
+    color-scheme: dark;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-orbitron;
+  }
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Space Grotesk', sans-serif;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Orbitron', sans-serif;
-}
-
-a {
-  text-decoration: none;
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-highlight-foreground: hsl(var(--highlight-foreground));
+  --color-highlight: hsl(var(--highlight));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-primary: hsl(var(--primary));
+  --color-secondary: hsl(var(--secondary));
+  --font-orbitron: 'Orbitron', sans-serif;
+  --font-sans: 'Space Grotesk', sans-serif;
 }
