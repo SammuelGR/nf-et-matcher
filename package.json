@@ -10,13 +10,17 @@
     "dev:host": "vite --host",
     "format": "prettier . --write",
     "lint": "eslint .",
+    "locales": "npx --yes i18next-resources-for-ts interface -i ./public/locales/pt-BR -o ./src/@types/resources.d.ts ",
     "preview": "vite preview"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
     "clsx": "^2.1.1",
+    "i18next": "^25.7.4",
+    "i18next-http-backend": "^3.0.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-i18next": "^16.5.3",
     "react-router": "^7.12.0",
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.18"
