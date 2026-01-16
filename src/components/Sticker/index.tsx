@@ -7,5 +7,5 @@ interface StickerProps {
 }
 
 export default function Sticker({ className, text, variant = 'green' }: StickerProps) {
-  return <span className={cn('sticker', `sticker-${variant}`, className)}>{text}</span>;
+  return <span className={cn('animate-pulse-glow', 'sticker', `sticker-${variant}`, className)}>{text}</span>;
 }

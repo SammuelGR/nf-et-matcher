@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import Background from '@/ui/Background';
+
 import Content from './Content';
 import Footer from './Footer';
 import Header from './Header';
@@ -14,12 +16,16 @@ export default function Generator() {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen">
-      <Header />
+    <div className="min-h-screen overflow-hidden relative">
+      <Background />
 
-      <Content onSubmitForm={onSubmitForm} searchMode={searchMode} setSearchMode={setSearchMode} />
+      <div className="flex flex-col items-center min-h-screen relative z-10">
+        <Header />
 
-      <Footer />
+        <Content onSubmitForm={onSubmitForm} searchMode={searchMode} setSearchMode={setSearchMode} />
+
+        <Footer />
+      </div>
     </div>
   );
 }
