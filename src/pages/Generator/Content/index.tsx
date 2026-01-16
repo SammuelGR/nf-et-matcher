@@ -1,6 +1,7 @@
 import { Search as SearchIcon, Shuffle as ShuffleIcon, Zap as ZapIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+import ArcadeCard from '@/components/ArcadeCard';
 import Sticker from '@/components/Sticker';
 
 import type { SearchMode } from '../types';
@@ -22,8 +23,11 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
 
   return (
     <main className="flex flex-1 flex-col items-center justify-center px-4 py-8">
-      {/* TODO: card */}
-      <div className="border-2 flex flex-col items-center justify-center p-8 rounded-xl space-y-6 w-full">
+      <ArcadeCard
+        animate={true}
+        className="flex flex-col items-center justify-center space-y-6 w-full"
+        variant="purple"
+      >
         <div className="space-y-2 text-center">
           <div className="flex items-center space-x-2">
             <ZapIcon className="animate-pulse h-5 text-neon-yellow w-5" />
@@ -90,7 +94,7 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
 
           <Sticker text={t(($) => $['content.sticker.3'])} variant="purple" />
         </div>
-      </div>
+      </ArcadeCard>
 
       <div className="mt-8 space-y-2 text-center">
         <p className="text-sm">✨ {t(($) => $['content.footer.heading'])}</p>
