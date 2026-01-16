@@ -1,3 +1,4 @@
+import { ExternalLink as ExternalLinkIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { URLS } from '@/constants/urls';
@@ -13,23 +14,27 @@ export default function Footer() {
         <span className="text-highlight">{NFT_COUNT}</span> {t(($) => $['footer.nft_count'])} 👽
       </p>
 
-      <div className="space-x-8 text-center">
+      <div className="flex gap-6 justify-center text-center">
         <a
-          className="hover:text-highlight transition-colors"
+          className="flex gap-1.5 items-center hover:text-highlight transition-colors"
           href={URLS.openSeaCollection}
           target="_blank"
           rel="noopener noreferrer"
         >
-          🔗 {t(($) => $['footer.anchor.opensea'])}
+          <ExternalLinkIcon className="h-4 w-4" />
+
+          {t(($) => $['footer.anchor.opensea'])}
         </a>
 
         <a
-          className="hover:text-highlight transition-colors"
+          className="flex gap-1.5 items-center hover:text-highlight transition-colors"
           href={URLS.repositoryGitHub}
           target="_blank"
           rel="noopener noreferrer"
         >
-          🔗 {t(($) => $['footer.anchor.github'])}
+          <ExternalLinkIcon className="h-4 w-4" />
+
+          {t(($) => $['footer.anchor.github'])}
         </a>
       </div>
 

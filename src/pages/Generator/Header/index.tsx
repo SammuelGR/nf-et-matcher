@@ -15,7 +15,7 @@ export default function Header() {
       <div className="flex gap-2 justify-center items-center">
         <span className="text-sm font-medium">{t(($) => $['header.subtitle'])}</span>
 
-        <Sticker text={t(($) => $['header.sticker'])} variant="purple" />
+        <Sticker text={t(($) => $['header.sticker'])} variant="cyan" />
       </div>
     </header>
   );

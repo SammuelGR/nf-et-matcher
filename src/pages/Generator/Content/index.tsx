@@ -1,3 +1,4 @@
+import { Search as SearchIcon, Shuffle as ShuffleIcon, Zap as ZapIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import Sticker from '@/components/Sticker';
@@ -25,13 +26,13 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
       <div className="border-2 flex flex-col items-center justify-center p-8 rounded-xl space-y-6 w-full">
         <div className="space-y-2 text-center">
           <div className="flex items-center space-x-2">
-            <span className="animate-pulse neon-text-yellow">⚡️</span>
+            <ZapIcon className="animate-pulse h-5 text-neon-yellow w-5" />
 
             <h2 className="font-bold text-primary text-xl tracking-wider uppercase">
               {t(($) => $['content.heading.title'])}
             </h2>
 
-            <span className="animate-pulse neon-text-yellow">⚡️</span>
+            <ZapIcon className="animate-pulse h-5 text-neon-yellow w-5" />
           </div>
 
           <p className="text-sm">{t(($) => $['content.heading.subtitle'])}</p>
@@ -70,24 +71,24 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
             </label>
 
             <button
-              className="bg-neon-green/70 cursor-pointer mt-4 uppercase text-muted h-10 rounded-sm w-full "
+              className="bg-neon-green/70 cursor-pointer flex gap-1.5 items-center justify-center mt-4 uppercase text-muted h-10 rounded-sm w-full "
               type="submit"
             >
-              🔍 {t(($) => $['content.form.btn_submit'])}
+              <SearchIcon className="w-5 h-5" /> {t(($) => $['content.form.btn_submit'])}
             </button>
           </form>
         ) : (
-          <button className="bg-neon-green/70 cursor-pointer h-12 rounded-sm text-muted uppercase w-full">
-            🔀 {t(($) => $['content.btn_random_match'])}
+          <button className="bg-neon-green/70 cursor-pointer flex gap-1.5 h-12 items-center justify-center rounded-sm text-muted uppercase w-full">
+            <ShuffleIcon /> {t(($) => $['content.btn_random_match'])}
           </button>
         )}
 
         <div className="mt-2 space-x-2">
-          <Sticker text={t(($) => $['content.sticker.1'])} variant="yellow" />
+          <Sticker text={t(($) => $['content.sticker.1'])} variant="green" />
 
           <Sticker text={t(($) => $['content.sticker.2'])} variant="pink" />
 
-          <Sticker text={t(($) => $['content.sticker.3'])} variant="cyan" />
+          <Sticker text={t(($) => $['content.sticker.3'])} variant="purple" />
         </div>
       </div>
 
