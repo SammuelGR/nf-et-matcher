@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import Sticker from '@/components/Sticker';
 
 import type { SearchMode } from '../types';
@@ -9,6 +11,8 @@ interface ContentProps {
 }
 
 export default function Content({ onSubmitForm, searchMode, setSearchMode }: ContentProps) {
+  const { t } = useTranslation('generator');
+
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -23,12 +27,14 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
           <div className="flex items-center space-x-2">
             <span className="animate-pulse neon-text-yellow">⚡️</span>
 
-            <h2 className="font-bold text-primary text-xl tracking-wider uppercase">Encontre seu match</h2>
+            <h2 className="font-bold text-primary text-xl tracking-wider uppercase">
+              {t(($) => $['content.heading.title'])}
+            </h2>
 
             <span className="animate-pulse neon-text-yellow">⚡️</span>
           </div>
 
-          <p className="text-sm">Escolha um modo e deixe o algoritmo degen trabalhar</p>
+          <p className="text-sm">{t(($) => $['content.heading.subtitle'])}</p>
         </div>
 
         <div className="flex gap-4 justify-center w-full">
@@ -36,28 +42,28 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
             className="cursor-pointer bg-highlight/70 hover:bg-highlight h-10 w-full rounded-sm text-highlight-foreground transition-colors"
             onClick={() => setSearchMode('id')}
           >
-            Por ID
+            {t(($) => $['content.mode.by_id'])}
           </button>
 
           <button
             className="cursor-pointer bg-highlight/70 hover:bg-highlight h-10 w-full rounded-sm text-highlight-foreground transition-colors"
             onClick={() => setSearchMode('random')}
           >
-            Aleatório
+            {t(($) => $['content.mode.random'])}
           </button>
         </div>
 
         {searchMode === 'id' ? (
           <form className="w-full" id="form-nft-id" onSubmit={formSubmitHandler} noValidate={true}>
             <label className="space-y-2">
-              <p className="text-sm font-medium">ID do seu ET</p>
+              <p className="text-sm font-medium">{t(($) => $['content.form.label'])}</p>
 
               <input
                 className="bg-muted/50 border border-white/10 focus:outline-none focus:border-highlight/50 focus:ring-2 focus:ring-highlight/20 font-mono placeholder:text-secondary/50 px-4 py-3 rounded-xl text-primary transition-all w-full"
                 id="input-nft-id"
                 max={4199}
                 min={0}
-                placeholder="Digite o ID (0 a 4199)"
+                placeholder={t(($) => $['content.form.placeholder'])}
                 step={1}
                 type="number"
               />
@@ -67,28 +73,28 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
               className="bg-neon-green/70 cursor-pointer mt-4 uppercase text-muted h-10 rounded-sm w-full "
               type="submit"
             >
-              🔍 Procurar match
+              🔍 {t(($) => $['content.form.btn_submit'])}
             </button>
           </form>
         ) : (
           <button className="bg-neon-green/70 cursor-pointer h-12 rounded-sm text-muted uppercase w-full">
-            🔀 Match aleatório
+            🔀 {t(($) => $['content.btn_random_match'])}
           </button>
         )}
 
         <div className="mt-2 space-x-2">
-          <Sticker text="NFA" variant="yellow" />
+          <Sticker text={t(($) => $['content.sticker.1'])} variant="yellow" />
 
-          <Sticker text="DYOR" variant="pink" />
+          <Sticker text={t(($) => $['content.sticker.2'])} variant="pink" />
 
-          <Sticker text="AURA++" variant="cyan" />
+          <Sticker text={t(($) => $['content.sticker.3'])} variant="cyan" />
         </div>
       </div>
 
       <div className="mt-8 space-y-2 text-center">
-        <p className="text-sm">✨ Sem login, sem KYC, só match de ET</p>
+        <p className="text-sm">✨ {t(($) => $['content.footer.heading'])}</p>
 
-        <small className="opacity-60 text-xs">Clique e reze pro algoritmo degen 🙏</small>
+        <small className="opacity-60 text-xs">{t(($) => $['content.footer.subheading'])} 🙏</small>
       </div>
     </main>
   );

@@ -1,10 +1,16 @@
+import { useTranslation } from 'react-i18next';
+
 import { URLS } from '@/constants/urls';
 
+const NFT_COUNT = 4200;
+
 export default function Footer() {
+  const { t } = useTranslation('generator');
+
   return (
     <footer className="mt-auto px-4 py-6 relative text-sm w-full">
       <p className="font-medium mb-4 text-center">
-        <span className="text-highlight">4.200</span> NF_ETs avistados na coleção 👽
+        <span className="text-highlight">{NFT_COUNT}</span> {t(($) => $['footer.nft_count'])} 👽
       </p>
 
       <div className="space-x-8 text-center">
@@ -14,7 +20,7 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          🔗 OpenSea
+          🔗 {t(($) => $['footer.anchor.opensea'])}
         </a>
 
         <a
@@ -23,7 +29,7 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          🔗 GitHub
+          🔗 {t(($) => $['footer.anchor.github'])}
         </a>
       </div>
 

@@ -1,7 +1,29 @@
 interface Resources {
+  "generator": {
+    "content.btn_random_match": "Match aleatório",
+    "content.footer.heading": "Sem login, sem KYC, só match de ET",
+    "content.footer.subheading": "Clique e reze pro algoritmo degen",
+    "content.form.btn_submit": "Procurar match",
+    "content.form.label": "ID do seu ET",
+    "content.form.placeholder": "Digite o ID (0 a 4199)",
+    "content.heading.subtitle": "Escolha um modo e deixe o algoritmo degen trabalhar",
+    "content.heading.title": "Encontre seu match",
+    "content.mode.by_id": "Por ID",
+    "content.mode.random": "Aleatório",
+    "content.sticker.1": "NFA",
+    "content.sticker.2": "DYOR",
+    "content.sticker.3": "Aura++",
+    "footer.anchor.github": "GitHub",
+    "footer.anchor.opensea": "OpenSea",
+    "footer.nft_count": "NF_ETs avistados na coleção",
+    "header.sticker": "Degen",
+    "header.subtitle": "Defizeros Edition",
+    "header.title.1": "NF_ET",
+    "header.title.2": "inder"
+  },
   "notFound": {
-    "cta": "Return to Home",
-    "description": "Oops! Page not found",
+    "cta": "Voltar para o início",
+    "description": "Oops! Página não encontrada",
     "title": "404"
   }
 }
