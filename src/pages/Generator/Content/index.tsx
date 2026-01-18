@@ -2,6 +2,7 @@ import { Search as SearchIcon, Shuffle as ShuffleIcon, Zap as ZapIcon } from 'lu
 import { useTranslation } from 'react-i18next';
 
 import ArcadeCard from '@/components/ArcadeCard';
+import NeonButton from '@/components/NeonButton';
 import Sticker from '@/components/Sticker';
 
 import type { SearchMode } from '../types';
@@ -74,17 +75,27 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
               />
             </label>
 
-            <button
-              className="bg-neon-green/70 cursor-pointer flex gap-1.5 items-center justify-center mt-4 uppercase text-muted h-10 rounded-sm w-full "
+            <NeonButton
+              className="mt-4 w-full"
+              disabled={false /* TODO */}
+              isLoading={false /* TODO */}
+              size="lg"
               type="submit"
+              variant="green"
             >
               <SearchIcon className="w-5 h-5" /> {t(($) => $['content.form.btn_submit'])}
-            </button>
+            </NeonButton>
           </form>
         ) : (
-          <button className="bg-neon-green/70 cursor-pointer flex gap-1.5 h-12 items-center justify-center rounded-sm text-muted uppercase w-full">
-            <ShuffleIcon /> {t(($) => $['content.btn_random_match'])}
-          </button>
+          <NeonButton
+            className="w-full"
+            disabled={false /* TODO */}
+            isLoading={false /* TODO */}
+            size="lg"
+            variant="gradient"
+          >
+            <ShuffleIcon className="w-5 h-5" /> {t(($) => $['content.btn_random_match'])}
+          </NeonButton>
         )}
 
         <div className="mt-2 space-x-2">

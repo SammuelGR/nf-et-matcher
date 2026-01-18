@@ -72,6 +72,16 @@
   h6 {
     @apply font-orbitron;
   }
+
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [aria-disabled='true'] {
+    cursor: not-allowed;
+  }
 }
 
 @layer components {
@@ -259,6 +269,23 @@
     animation: pulse-glow 2s ease-in-out infinite;
   }
 
+  @keyframes shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-2px);
+    }
+    75% {
+      transform: translateX(2px);
+    }
+  }
+
+  .hover-shake:hover {
+    animation: shake 0.3s ease-in-out;
+  }
+
   @keyframes twinkle {
     0%,
     100% {
@@ -272,4 +299,22 @@
   .animate-twinkle {
     animation: twinkle 3s ease-in-out infinite;
   }
+}
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted rounded-full;
+  border: 2px solid transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50;
 }
