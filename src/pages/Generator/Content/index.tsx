@@ -5,6 +5,8 @@ import ArcadeCard from '@/components/ArcadeCard';
 import NeonButton from '@/components/NeonButton';
 import Sticker from '@/components/Sticker';
 
+import ModeToggle from './ModeToggle';
+
 import type { SearchMode } from '../types';
 
 interface ContentProps {
@@ -23,14 +25,14 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
   };
 
   return (
-    <main className="flex flex-1 flex-col items-center justify-center px-4 py-8">
+    <main className="flex flex-1 flex-col items-center justify-center px-4 py-8 w-full">
       <ArcadeCard
         animate={true}
-        className="flex flex-col items-center justify-center space-y-6 w-full"
+        className="flex flex-col items-center justify-center max-w-md space-y-6"
         variant="purple"
       >
         <div className="space-y-2 text-center">
-          <div className="flex items-center space-x-2">
+          <div className="flex justify-center items-center mt-6 space-x-2">
             <ZapIcon className="animate-pulse h-5 text-neon-yellow w-5" />
 
             <h2 className="font-bold text-primary text-xl tracking-wider uppercase">
@@ -40,27 +42,13 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
             <ZapIcon className="animate-pulse h-5 text-neon-yellow w-5" />
           </div>
 
-          <p className="text-sm">{t(($) => $['content.heading.subtitle'])}</p>
+          <p className="text-sm px-1.5">{t(($) => $['content.heading.subtitle'])}</p>
         </div>
 
-        <div className="flex gap-4 justify-center w-full">
-          <button
-            className="cursor-pointer bg-highlight/70 hover:bg-highlight h-10 w-full rounded-sm text-highlight-foreground transition-colors"
-            onClick={() => setSearchMode('id')}
-          >
-            {t(($) => $['content.mode.by_id'])}
-          </button>
-
-          <button
-            className="cursor-pointer bg-highlight/70 hover:bg-highlight h-10 w-full rounded-sm text-highlight-foreground transition-colors"
-            onClick={() => setSearchMode('random')}
-          >
-            {t(($) => $['content.mode.random'])}
-          </button>
-        </div>
+        <ModeToggle mode={searchMode} onModeChange={setSearchMode} />
 
         {searchMode === 'id' ? (
-          <form className="w-full" id="form-nft-id" onSubmit={formSubmitHandler} noValidate={true}>
+          <form id="form-nft-id" onSubmit={formSubmitHandler} noValidate={true}>
             <label className="space-y-2">
               <p className="text-sm font-medium">{t(($) => $['content.form.label'])}</p>
 
@@ -110,7 +98,7 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
       <div className="mt-8 space-y-2 text-center">
         <p className="text-sm">✨ {t(($) => $['content.footer.heading'])}</p>
 
-        <small className="opacity-60 text-xs">{t(($) => $['content.footer.subheading'])} 🙏</small>
+        <small className="block opacity-60 text-xs">{t(($) => $['content.footer.subheading'])} 🙏</small>
       </div>
     </main>
   );

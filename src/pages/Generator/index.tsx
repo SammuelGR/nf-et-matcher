@@ -9,7 +9,7 @@ import Header from './Header';
 import type { SearchMode } from './types';
 
 export default function Generator() {
-  const [searchMode, setSearchMode] = useState<SearchMode>('id');
+  const [searchMode, setSearchMode] = useState<SearchMode>('random');
 
   const onSubmitForm = () => {
     // it does nothing ¯\_(ツ)_/¯
