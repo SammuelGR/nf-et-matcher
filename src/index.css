@@ -271,6 +271,20 @@
     animation: pulse-glow 2s ease-in-out infinite;
   }
 
+  @keyframes scale-bounce {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  .animate-scale-bounce {
+    animation: scale-bounce 2s ease-in-out infinite;
+  }
+
   @keyframes shake {
     0%,
     100% {
