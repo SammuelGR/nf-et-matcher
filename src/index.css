@@ -288,6 +288,24 @@
     animation: shake 0.3s ease-in-out;
   }
 
+  @keyframes slot-reveal {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(10%);
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slot-reveal {
+    animation: slot-reveal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
   @keyframes twinkle {
     0%,
     100% {

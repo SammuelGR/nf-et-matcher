@@ -1,9 +1,11 @@
 import { Search as SearchIcon, Shuffle as ShuffleIcon, Zap as ZapIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
 
 import ArcadeCard from '@/components/ArcadeCard';
 import NeonButton from '@/components/NeonButton';
 import Sticker from '@/components/Sticker';
+import { PATHS } from '@/routes/paths';
 
 import ModeToggle from './ModeToggle';
 
@@ -18,10 +20,16 @@ interface ContentProps {
 export default function Content({ onSubmitForm, searchMode, setSearchMode }: ContentProps) {
   const { t } = useTranslation('generator');
 
+  const navigate = useNavigate();
+
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     onSubmitForm();
+  };
+
+  const randomMatchClickHandler = () => {
+    navigate(PATHS.MATCH);
   };
 
   return (
@@ -79,6 +87,7 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
             className="w-full"
             disabled={false /* TODO */}
             isLoading={false /* TODO */}
+            onClick={randomMatchClickHandler}
             size="lg"
             variant="gradient"
           >

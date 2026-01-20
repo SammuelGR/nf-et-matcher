@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
+import { PATHS } from '@/routes/paths';
 import Background from '@/ui/Background';
 
 import Content from './Content';
@@ -11,8 +13,10 @@ import type { SearchMode } from './types';
 export default function Generator() {
   const [searchMode, setSearchMode] = useState<SearchMode>('random');
 
+  const navigate = useNavigate();
+
   const onSubmitForm = () => {
-    // it does nothing ¯\_(ツ)_/¯
+    navigate(PATHS.MATCH);
   };
 
   return (
