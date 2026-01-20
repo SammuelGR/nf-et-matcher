@@ -4,6 +4,10 @@
   },
   "importStringConfiguration": {
     "hasSemicolon": true,
+    "maximumNumberOfImportExpressionsPerLine": {
+      "count": 120,
+      "type": "maxLineLength"
+    },
     "numberOfEmptyLinesAfterAllImports": 1,
     "quoteMark": "single"
   },
