@@ -15,5 +15,10 @@
   "header.btn_go_back": "Voltar",
   "header.btn_new_match": "Novo match",
   "header.title.1": "NF_ET",
-  "header.title.2": "inder"
+  "header.title.2": "inder",
+  "loading_state.message.1": "Procurando ET compatível",
+  "loading_state.message.2": "Decidindo entre A, B ou C",
+  "loading_state.message.3": "Calibrando algoritmo da nave",
+  "loading_state.message.4": "Consultando oráculo alienígena",
+  "loading_state.message.5": "Verificando com os caras lá"
 }
