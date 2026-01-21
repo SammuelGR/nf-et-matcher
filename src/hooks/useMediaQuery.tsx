@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function useMediaQueries(query: string) {
+export default function useMediaQuery(query: string) {
   const getMatch = () => {
     if (globalThis.window === undefined) return false;
 

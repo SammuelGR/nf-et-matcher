@@ -12,7 +12,7 @@ import ArcadeCard from '@/components/ArcadeCard';
 import NeonButton from '@/components/NeonButton';
 import Sticker from '@/components/Sticker';
 import { rules } from '@/constants/breakpoints';
-import useMediaQueries from '@/hooks/useMediaQuery';
+import useMediaQuery from '@/hooks/useMediaQuery';
 import { PATHS } from '@/routes/paths';
 import Background from '@/ui/Background';
 import { cn } from '@/utils/cn';
@@ -24,7 +24,7 @@ const nftIds = [192, 7]; // TODO
 export default function Match() {
   const navigate = useNavigate();
 
-  const isMd = useMediaQueries(rules.md);
+  const isMd = useMediaQuery(rules.md);
 
   return (
     <div className="min-h-screen relative">
