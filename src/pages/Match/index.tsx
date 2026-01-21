@@ -1,16 +1,30 @@
-import { ArrowLeft as ArrowLeftIcon, RefreshCw as RefreshCwIcon, Sparkles as SparklesIcon } from 'lucide-react';
+import {
+  ArrowLeft as ArrowLeftIcon,
+  Copy as CopyIcon,
+  Download as DownloadIcon,
+  ExternalLink as ExternalLinkIcon,
+  RefreshCw as RefreshCwIcon,
+  Sparkles as SparklesIcon,
+} from 'lucide-react';
 import { useNavigate } from 'react-router';
 
 import ArcadeCard from '@/components/ArcadeCard';
 import NeonButton from '@/components/NeonButton';
+import Sticker from '@/components/Sticker';
+import { rules } from '@/constants/breakpoints';
+import useMediaQueries from '@/hooks/useMediaQuery';
 import { PATHS } from '@/routes/paths';
 import Background from '@/ui/Background';
 import { cn } from '@/utils/cn';
 
 import NFTCard from './NFTCard';
 
+const nftIds = [192, 7]; // TODO
+
 export default function Match() {
   const navigate = useNavigate();
+
+  const isMd = useMediaQueries(rules.md);
 
   return (
     <div className="min-h-screen relative">
@@ -23,7 +37,7 @@ export default function Match() {
             Voltar
           </NeonButton>
 
-          <h1 className="absolute inset-x-0 font-bold neon-text-pink hidden sm:block text-center text-primary text-xl">
+          <h1 className="absolute inset-x-0 font-bold neon-text-pink hidden sm:block pointer-events-none text-center text-primary text-xl">
             <span className="neon-text-green">NF_ET</span>inder
           </h1>
 
@@ -57,7 +71,7 @@ export default function Match() {
 
           <ArcadeCard variant="pink">
             <div className="flex flex-col md:flex-row items-center gap-1 md:gap-8">
-              <NFTCard delay={200} id="1" imgUrl="TODO" />
+              <NFTCard delay={200} id={String(nftIds[0])} imgUrl="TODO" />
 
               <div className="flex flex-col items-center py-4">
                 <div
@@ -77,9 +91,39 @@ export default function Match() {
                 </span>
               </div>
 
-              <NFTCard delay={400} id="2" imgUrl="TODO" />
+              <NFTCard delay={400} id={String(nftIds[1])} imgUrl="TODO" />
+            </div>
+
+            <div className="border-t border-white/5 flex flex-wrap gap-2 justify-center mt-6 pt-6">
+              <Sticker variant="purple" text="Et Approved" />
+
+              <Sticker variant="cyan" text="LFG" />
+
+              <Sticker variant="yellow" text={`#${nftIds[0]} + #${nftIds[1]}`} />
             </div>
           </ArcadeCard>
+
+          <div className="flex flex-wrap gap-4 justify-between ">
+            <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="cyan">
+              <CopyIcon className="w-4 h-4" />
+              Copiar link
+            </NeonButton>
+
+            <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="purple">
+              <DownloadIcon className="w-4 h-4" />
+              Baixar card
+            </NeonButton>
+
+            <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="green">
+              <ExternalLinkIcon className="w-4 h-4" />
+              Ver #{nftIds[0]}
+            </NeonButton>
+
+            <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="pink">
+              <ExternalLinkIcon className="w-4 h-4" />
+              Ver #{nftIds[1]}
+            </NeonButton>
+          </div>
 
           <div className="pt-4 space-y-1 text-center">
             <p className="text-sm">Manda no chat e marca o ET 👽</p>
