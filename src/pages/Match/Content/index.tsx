@@ -4,6 +4,7 @@ import {
   ExternalLink as ExternalLinkIcon,
   Sparkles as SparklesIcon,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import ArcadeCard from '@/components/ArcadeCard';
 import NeonButton from '@/components/NeonButton';
@@ -19,6 +20,8 @@ const nftIds = [192, 7]; // TODO
 export default function Content() {
   const isMd = useMediaQuery(rules.md);
 
+  const { t } = useTranslation('match');
+
   return (
     <main className="flex flex-1 flex-col gap-6 items-center justify-center px-4 py-8">
       <div className="animate-slot-reveal flex flex-col gap-2 items-center">
@@ -26,13 +29,13 @@ export default function Content() {
           <SparklesIcon className="animate-pulse-glow h-6 text-neon-yellow w-6" />
 
           <h2 className="font-black neon-text-green text-xl md:text-3xl tracking-wider uppercase text-center text-highlight">
-            Match Detectado!
+            {t(($) => $['content.heading.title'])}
           </h2>
 
           <SparklesIcon className="animate-pulse-glow h-6 text-neon-yellow w-6" />
         </div>
 
-        <p className="text-sm">O algoritmo degen encontrou um par cósmico</p>
+        <p className="text-sm">{t(($) => $['content.heading.subtitle'])}</p>
       </div>
 
       <ArcadeCard variant="pink">
@@ -46,10 +49,14 @@ export default function Content() {
                 'bg-linear-to-br from-highlight via-accent to-neon-purple',
               )}
             >
-              <span className="font-black text-2xl md:text-3xl text-highlight-foreground">VS</span>
+              <span className="font-black text-2xl md:text-3xl text-highlight-foreground uppercase">
+                {t(($) => $['content.card.versus'])}
+              </span>
             </div>
 
-            <span className="pb-1 pt-3 text-xs tracking-wider uppercase">Compatibilidade</span>
+            <span className="pb-1 pt-3 text-xs tracking-wider uppercase">
+              {t(($) => $['content.card.compatibility'])}
+            </span>
 
             <span className="font-black neon-text-cyan text-2xl text-accent">
               50%
@@ -61,9 +68,9 @@ export default function Content() {
         </div>
 
         <div className="border-t border-white/5 flex flex-wrap gap-2 justify-center mt-6 pt-6">
-          <Sticker variant="purple" text="Et Approved" />
+          <Sticker variant="purple" text={t(($) => $['content.card.sticker.1'])} />
 
-          <Sticker variant="cyan" text="LFG" />
+          <Sticker variant="cyan" text={t(($) => $['content.card.sticker.2'])} />
 
           <Sticker variant="yellow" text={`#${nftIds[0]} + #${nftIds[1]}`} />
         </div>
@@ -72,29 +79,29 @@ export default function Content() {
       <div className="flex flex-wrap gap-4 justify-between ">
         <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="cyan">
           <CopyIcon className="w-4 h-4" />
-          Copiar link
+          {t(($) => $['content.action_btn.copy_link'])}
         </NeonButton>
 
         <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="purple">
           <DownloadIcon className="w-4 h-4" />
-          Baixar card
+          {t(($) => $['content.action_btn.download'])}
         </NeonButton>
 
         <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="green">
           <ExternalLinkIcon className="w-4 h-4" />
-          Ver #{nftIds[0]}
+          {t(($) => $['content.action_btn.open_external_link'])} #{nftIds[0]}
         </NeonButton>
 
         <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="pink">
           <ExternalLinkIcon className="w-4 h-4" />
-          Ver #{nftIds[1]}
+          {t(($) => $['content.action_btn.open_external_link'])} #{nftIds[1]}
         </NeonButton>
       </div>
 
       <div className="pt-4 space-y-1 text-center">
-        <p className="text-sm">Manda no chat e marca o ET 👽</p>
+        <p className="text-sm">{t(($) => $['content.footer.title'])} 👽</p>
 
-        <p className="text-secondary/60 text-xs">Se der ruim, gera outro e finge que era esse</p>
+        <p className="text-secondary/60 text-xs">{t(($) => $['content.footer.subtitle'])}</p>
       </div>
     </main>
   );

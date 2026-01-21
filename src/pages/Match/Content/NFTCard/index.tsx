@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import Sticker from '@/components/Sticker';
 import { cn } from '@/utils/cn';
 
@@ -8,6 +10,8 @@ interface NFTCardProps {
 }
 
 export default function NFTCard({ id, delay, imgUrl }: NFTCardProps) {
+  const { t } = useTranslation('match');
+
   const imgUrlPlaceholder = `https://placehold.co/400x400/1a1a2e/39ff14?text=NFET%23${id}`;
 
   return (
@@ -18,7 +22,7 @@ export default function NFTCard({ id, delay, imgUrl }: NFTCardProps) {
       <div className="aspect-square bg-card/80 overflow-hidden">
         <img
           src={imgUrl}
-          alt={`Defizero #${id}`}
+          alt={`${t(($) => $['content.nft_card.img_alt'])} #${id}`}
           className="duration-500 group-hover:scale-115 h-full object-center object-cover transition-transform scale-105 w-full"
           onError={(e) => {
             (e.target as HTMLImageElement).src = imgUrlPlaceholder;
@@ -31,7 +35,7 @@ export default function NFTCard({ id, delay, imgUrl }: NFTCardProps) {
       <div className="absolute bottom-3 flex items-center justify-between left-3 right-3">
         <span className="font-orbitron font-bold text-primary neon-text-green text-lg">#{id}</span>
 
-        <Sticker text="DEFIZERO" variant="purple" />
+        <Sticker text={t(($) => $['content.nft_card.sticker'])} variant="purple" />
       </div>
 
       <div
