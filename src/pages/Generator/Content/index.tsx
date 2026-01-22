@@ -43,7 +43,7 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
           <div className="flex justify-center items-center mt-6 space-x-2">
             <ZapIcon className="animate-pulse h-5 text-neon-yellow w-5" />
 
-            <h2 className="font-bold text-primary text-xl tracking-wider uppercase">
+            <h2 className="font-bold text-primary text-md sm:text-xl tracking-wider uppercase">
               {t(($) => $['content.heading.title'])}
             </h2>
 
@@ -72,7 +72,7 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
             </label>
 
             <NeonButton
-              className="mt-4 w-full"
+              className="mt-4 text-sm sm:text-lg w-full"
               disabled={false /* TODO */}
               isLoading={false /* TODO */}
               size="lg"
@@ -84,7 +84,7 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
           </form>
         ) : (
           <NeonButton
-            className="w-full"
+            className="text-sm sm:text-lg w-full"
             disabled={false /* TODO */}
             isLoading={false /* TODO */}
             onClick={randomMatchClickHandler}
