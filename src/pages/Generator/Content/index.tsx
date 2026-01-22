@@ -1,11 +1,15 @@
 import { Search as SearchIcon, Shuffle as ShuffleIcon, Zap as ZapIcon } from 'lucide-react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 
 import ArcadeCard from '@/components/ArcadeCard';
 import NeonButton from '@/components/NeonButton';
 import Sticker from '@/components/Sticker';
+import { DEFIZEROS_MAX_SUPPLY } from '@/constants/contracts';
+import useCollectionStats from '@/hooks/useCollectionStats';
 import { PATHS } from '@/routes/paths';
+import { cn } from '@/utils/cn';
 
 import ModeToggle from './ModeToggle';
 
@@ -20,6 +24,12 @@ interface ContentProps {
 export default function Content({ onSubmitForm, searchMode, setSearchMode }: ContentProps) {
   const { t } = useTranslation('generator');
 
+  const [nftId, setNftId] = useState('');
+
+  const { totalSupply } = useCollectionStats();
+
+  const maxValidNftId = totalSupply || DEFIZEROS_MAX_SUPPLY;
+
   const navigate = useNavigate();
 
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,6 +41,8 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
   const randomMatchClickHandler = () => {
     navigate(PATHS.MATCH);
   };
+
+  const isValidNftId = Number.parseInt(nftId) > 0 && Number.parseInt(nftId) <= maxValidNftId;
 
   return (
     <main className="flex flex-1 flex-col items-center justify-center px-4 py-8 w-full">
@@ -57,23 +69,32 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
 
         {searchMode === 'id' ? (
           <form id="form-nft-id" onSubmit={formSubmitHandler} noValidate={true}>
-            <label className="space-y-2">
+            <label className="relative space-y-2">
               <p className="text-sm font-medium">{t(($) => $['content.form.label'])}</p>
 
               <input
-                className="bg-muted/50 border border-white/10 focus:outline-none focus:border-highlight/50 focus:ring-2 focus:ring-highlight/20 font-mono placeholder:text-secondary/50 px-4 py-3 rounded-xl text-primary transition-all w-full"
+                className={cn(
+                  'bg-muted/50 border border-white/10 font-mono px-4 py-3 rounded-xl text-primary transition-all w-full',
+                  'focus:outline-none focus:border-highlight/50 focus:ring-2 focus:ring-highlight/20 placeholder:text-secondary/50',
+                )}
                 id="input-nft-id"
-                max={4199}
+                max={maxValidNftId}
                 min={0}
-                placeholder={t(($) => $['content.form.placeholder'])}
+                onChange={(e) => setNftId(e.target.value)}
+                placeholder={t(($) => $['content.form.placeholder'], { max: maxValidNftId })}
                 step={1}
                 type="number"
+                value={nftId}
               />
+
+              {nftId && !isValidNftId && (
+                <p className="absolute left-4 text-destructive text-xs">{t(($) => $['content.form.invalid_nft_id'])}</p>
+              )}
             </label>
 
             <NeonButton
-              className="mt-4 text-sm sm:text-lg w-full"
-              disabled={false /* TODO */}
+              className="mt-5 text-sm sm:text-lg w-full"
+              disabled={!nftId || !isValidNftId}
               isLoading={false /* TODO */}
               size="lg"
               type="submit"
@@ -85,7 +106,6 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
         ) : (
           <NeonButton
             className="text-sm sm:text-lg w-full"
-            disabled={false /* TODO */}
             isLoading={false /* TODO */}
             onClick={randomMatchClickHandler}
             size="lg"
