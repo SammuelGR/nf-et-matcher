@@ -1,17 +1,20 @@
 import { ExternalLink as ExternalLinkIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+import { DEFIZEROS_MAX_SUPPLY } from '@/constants/contracts';
 import { URLS } from '@/constants/urls';
-
-const NFT_COUNT = 4200;
+import useCollectionStats from '@/hooks/useCollectionStats';
 
 export default function Footer() {
   const { t } = useTranslation('generator');
 
+  const { totalSupply } = useCollectionStats();
+
   return (
     <footer className="mt-auto px-4 py-6 relative text-sm w-full">
       <p className="font-medium mb-4 text-center">
-        <span className="text-highlight">{NFT_COUNT}</span> {t(($) => $['footer.nft_count'])} 👽
+        <span className="text-highlight">{totalSupply || DEFIZEROS_MAX_SUPPLY}</span> {t(($) => $['footer.nft_count'])}{' '}
+        👽
       </p>
 
       <div className="flex gap-6 justify-center text-center">
