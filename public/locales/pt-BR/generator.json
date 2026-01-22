@@ -4,7 +4,7 @@
   "content.footer.subheading": "Clique e reze pro algoritmo degen",
   "content.form.btn_submit": "Procurar match",
   "content.form.label": "ID do seu ET",
-  "content.form.placeholder": "Digite o ID (1 a {{max}})",
+  "content.form.placeholder": "Digite o ID (0 a {{max}})",
   "content.form.invalid_nft_id": "NFT ID inválido",
   "content.heading.subtitle": "Escolha um modo e deixe o algoritmo degen trabalhar",
   "content.heading.title": "Encontre seu match",

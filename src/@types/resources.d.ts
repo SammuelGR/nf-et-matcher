@@ -6,7 +6,7 @@ interface Resources {
     "content.form.btn_submit": "Procurar match",
     "content.form.invalid_nft_id": "NFT ID inválido",
     "content.form.label": "ID do seu ET",
-    "content.form.placeholder": "Digite o ID (1 a {{max}})",
+    "content.form.placeholder": "Digite o ID (0 a {{max}})",
     "content.heading.subtitle": "Escolha um modo e deixe o algoritmo degen trabalhar",
     "content.heading.title": "Encontre seu match",
     "content.mode.by_id": "Por ID",

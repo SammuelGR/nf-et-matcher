@@ -28,7 +28,9 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
 
   const { totalSupply } = useCollectionStats();
 
-  const maxValidNftId = totalSupply || DEFIZEROS_MAX_SUPPLY;
+  const maxValidNftId = (totalSupply || DEFIZEROS_MAX_SUPPLY) - 1;
+
+  const isValidNftId = Number.parseInt(nftId) >= 0 && Number.parseInt(nftId) <= maxValidNftId;
 
   const navigate = useNavigate();
 
@@ -41,8 +43,6 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
   const randomMatchClickHandler = () => {
     navigate(PATHS.MATCH);
   };
-
-  const isValidNftId = Number.parseInt(nftId) > 0 && Number.parseInt(nftId) <= maxValidNftId;
 
   return (
     <main className="flex flex-1 flex-col items-center justify-center px-4 py-8 w-full">
