@@ -1,5 +1,6 @@
 {
-  "content.action_btn.copy_link": "Copiar link",
+  "content.action_btn.copy_link.label": "Copiar link",
+  "content.action_btn.copy_link.success": "Copiado",
   "content.action_btn.download": "Baixar card",
   "content.action_btn.open_external_link": "Ver",
   "content.card.compatibility": "Compatibilidade",

@@ -1,8 +1,6 @@
 import {
-  Copy as CopyIcon,
-  Download as DownloadIcon,
-  ExternalLink as ExternalLinkIcon,
-  Sparkles as SparklesIcon,
+    Check as CheckIcon, Copy as CopyIcon, Download as DownloadIcon, ExternalLink as ExternalLinkIcon,
+    Sparkles as SparklesIcon
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -10,6 +8,7 @@ import ArcadeCard from '@/components/ArcadeCard';
 import NeonButton from '@/components/NeonButton';
 import Sticker from '@/components/Sticker';
 import { rules } from '@/constants/breakpoints';
+import useClipboard from '@/hooks/useClipboard';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import { cn } from '@/utils/cn';
 
@@ -21,6 +20,12 @@ export default function Content() {
   const isMd = useMediaQuery(rules.md);
 
   const { t } = useTranslation('match');
+
+  const { isCopied, writeToClipboard } = useClipboard();
+
+  const copyLinkClickHandler = () => {
+    writeToClipboard(globalThis.window.location.href);
+  };
 
   return (
     <main className="flex flex-1 flex-col gap-6 items-center justify-center px-4 py-8">
@@ -77,9 +82,17 @@ export default function Content() {
       </ArcadeCard>
 
       <div className="flex flex-wrap gap-4 justify-between ">
-        <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="cyan">
-          <CopyIcon className="w-4 h-4" />
-          {t(($) => $['content.action_btn.copy_link'])}
+        <NeonButton
+          className="w-full sm:w-auto"
+          onClick={copyLinkClickHandler}
+          size={isMd ? 'md' : 'sm'}
+          variant="cyan"
+        >
+          {isCopied ? <CheckIcon className="w-4 h-4" /> : <CopyIcon className="w-4 h-4" />}
+
+          {isCopied
+            ? t(($) => $['content.action_btn.copy_link.success'])
+            : t(($) => $['content.action_btn.copy_link.label'])}
         </NeonButton>
 
         <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="purple">
