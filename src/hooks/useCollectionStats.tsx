@@ -1,6 +1,6 @@
 import { useReadContract } from 'wagmi';
 
-import { DEFIZEROS_ABI, DEFIZEROS_ADDRESS } from '@/constants/contracts';
+import { DEFIZEROS_ABI, DEFIZEROS_ADDRESS, DEFIZEROS_MAX_SUPPLY } from '@/constants/contracts';
 
 export default function useCollectionStats() {
   const {
@@ -17,8 +17,9 @@ export default function useCollectionStats() {
   });
 
   return {
-    totalSupply: totalSupply ? Number(totalSupply) : null,
-    isLoading,
     isError,
+    isLoading,
+    lastMintedId: (totalSupply ? Number(totalSupply) : DEFIZEROS_MAX_SUPPLY) - 1,
+    totalSupply: totalSupply ? Number(totalSupply) : null,
   };
 }

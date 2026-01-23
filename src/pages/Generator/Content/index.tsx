@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router';
 import ArcadeCard from '@/components/ArcadeCard';
 import NeonButton from '@/components/NeonButton';
 import Sticker from '@/components/Sticker';
-import { DEFIZEROS_MAX_SUPPLY } from '@/constants/contracts';
 import useCollectionStats from '@/hooks/useCollectionStats';
 import { PATHS } from '@/routes/paths';
 import { cn } from '@/utils/cn';
@@ -26,11 +25,9 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
 
   const [nftId, setNftId] = useState('');
 
-  const { totalSupply } = useCollectionStats();
+  const { lastMintedId } = useCollectionStats();
 
-  const maxValidNftId = (totalSupply || DEFIZEROS_MAX_SUPPLY) - 1;
-
-  const isValidNftId = Number.parseInt(nftId) >= 0 && Number.parseInt(nftId) <= maxValidNftId;
+  const isValidNftId = Number.parseInt(nftId) >= 0 && Number.parseInt(nftId) <= lastMintedId;
 
   const navigate = useNavigate();
 
@@ -78,10 +75,10 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
                   'focus:outline-none focus:border-highlight/50 focus:ring-2 focus:ring-highlight/20 placeholder:text-secondary/50',
                 )}
                 id="input-nft-id"
-                max={maxValidNftId}
+                max={lastMintedId}
                 min={0}
                 onChange={(e) => setNftId(e.target.value)}
-                placeholder={t(($) => $['content.form.placeholder'], { max: maxValidNftId })}
+                placeholder={t(($) => $['content.form.placeholder'], { max: lastMintedId })}
                 step={1}
                 type="number"
                 value={nftId}
