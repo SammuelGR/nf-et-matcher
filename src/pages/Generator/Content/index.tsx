@@ -77,10 +77,9 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
                 id="input-nft-id"
                 max={lastMintedId}
                 min={0}
-                onChange={(e) => setNftId(e.target.value)}
+                onChange={(e) => setNftId(e.target.value.replaceAll(/\D/g, ''))}
+                pattern="[0-9]*"
                 placeholder={t(($) => $['content.form.placeholder'], { max: lastMintedId })}
-                step={1}
-                type="number"
                 value={nftId}
               />
 
