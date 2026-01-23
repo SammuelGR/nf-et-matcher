@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router';
 
 import NeonButton from '@/components/NeonButton';
 import useCollectionStats from '@/hooks/useCollectionStats';
-import { useMatchUrl } from '@/hooks/useMatchUrl';
+import useMatchUrl from '@/hooks/useMatchUrl';
 import { PATHS } from '@/routes/paths';
 
 export default function Header() {

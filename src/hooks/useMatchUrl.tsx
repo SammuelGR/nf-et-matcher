@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router';
 
-export function useMatchUrl() {
+export default function useMatchUrl() {
   const [searchParams] = useSearchParams();
 
   const generateHash = (id1: number, id2: number) => {

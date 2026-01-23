@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router';
 
-import { useMatchUrl } from '@/hooks/useMatchUrl';
+import useMatchUrl from '@/hooks/useMatchUrl';
 import { PATHS } from '@/routes/paths';
 import Background from '@/ui/Background';
 

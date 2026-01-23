@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import useCollectionStats from '@/hooks/useCollectionStats';
-import { useMatchUrl } from '@/hooks/useMatchUrl';
+import useMatchUrl from '@/hooks/useMatchUrl';
 import { PATHS } from '@/routes/paths';
 import Background from '@/ui/Background';
 
