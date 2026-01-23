@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
+import { Navigate } from 'react-router';
 
+import { useMatchUrl } from '@/hooks/useMatchUrl';
+import { PATHS } from '@/routes/paths';
 import Background from '@/ui/Background';
 
 import Content from './Content';
@@ -8,6 +11,8 @@ import LoadingState from './LoadingState';
 
 export default function Match() {
   const [isLoading, setIsLoading] = useState(true);
+
+  const { matchIds } = useMatchUrl();
 
   // TODO: switch to real loading of fetch
   useEffect(() => {
@@ -18,7 +23,9 @@ export default function Match() {
     return () => clearTimeout(loadingTimer);
   }, []);
 
-  return (
+  return matchIds === null ? (
+    <Navigate to={PATHS.GENERATOR} replace={true} />
+  ) : (
     <div className="min-h-screen relative">
       <Background />
 

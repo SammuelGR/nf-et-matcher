@@ -1,13 +1,10 @@
 import { Search as SearchIcon, Shuffle as ShuffleIcon, Zap as ZapIcon } from 'lucide-react';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
 
 import ArcadeCard from '@/components/ArcadeCard';
 import NeonButton from '@/components/NeonButton';
 import Sticker from '@/components/Sticker';
 import useCollectionStats from '@/hooks/useCollectionStats';
-import { PATHS } from '@/routes/paths';
 import { cn } from '@/utils/cn';
 
 import ModeToggle from './ModeToggle';
@@ -15,30 +12,28 @@ import ModeToggle from './ModeToggle';
 import type { SearchMode } from '../types';
 
 interface ContentProps {
-  onSubmitForm: () => void;
+  nftId: string;
+  onSubmitForm: (isRandom: boolean) => void;
   searchMode: SearchMode;
+  setNftId: React.Dispatch<React.SetStateAction<string>>;
   setSearchMode: React.Dispatch<React.SetStateAction<SearchMode>>;
 }
 
-export default function Content({ onSubmitForm, searchMode, setSearchMode }: ContentProps) {
+export default function Content({ nftId, onSubmitForm, searchMode, setNftId, setSearchMode }: ContentProps) {
   const { t } = useTranslation('generator');
 
-  const [nftId, setNftId] = useState('');
-
-  const { lastMintedId } = useCollectionStats();
+  const { lastMintedId, isLoading } = useCollectionStats();
 
   const isValidNftId = Number.parseInt(nftId) >= 0 && Number.parseInt(nftId) <= lastMintedId;
-
-  const navigate = useNavigate();
 
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    onSubmitForm();
+    onSubmitForm(false);
   };
 
   const randomMatchClickHandler = () => {
-    navigate(PATHS.MATCH);
+    onSubmitForm(true);
   };
 
   return (
@@ -91,7 +86,7 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
             <NeonButton
               className="mt-5 text-sm sm:text-lg w-full"
               disabled={!nftId || !isValidNftId}
-              isLoading={false /* TODO */}
+              isLoading={isLoading}
               size="lg"
               type="submit"
               variant="green"
@@ -102,7 +97,7 @@ export default function Content({ onSubmitForm, searchMode, setSearchMode }: Con
         ) : (
           <NeonButton
             className="text-sm sm:text-lg w-full"
-            isLoading={false /* TODO */}
+            isLoading={isLoading}
             onClick={randomMatchClickHandler}
             size="lg"
             variant="gradient"
