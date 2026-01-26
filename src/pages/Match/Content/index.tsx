@@ -9,17 +9,22 @@ import NeonButton from '@/components/NeonButton';
 import Sticker from '@/components/Sticker';
 import { rules } from '@/constants/breakpoints';
 import useClipboard from '@/hooks/useClipboard';
+import useMatchUrl from '@/hooks/useMatchUrl';
 import useMediaQuery from '@/hooks/useMediaQuery';
+import useNftImages from '@/hooks/useNftImages';
 import { cn } from '@/utils/cn';
 
+import LoadingState from './LoadingState';
 import NFTCard from './NFTCard';
-
-const nftIds = [192, 7]; // TODO
 
 export default function Content() {
   const isMd = useMediaQuery(rules.md);
 
   const { t } = useTranslation('match');
+
+  const { matchIds } = useMatchUrl();
+
+  const { data, isLoading } = useNftImages(matchIds || []);
 
   const { isCopied, writeToClipboard } = useClipboard();
 
@@ -27,7 +32,9 @@ export default function Content() {
     writeToClipboard(globalThis.window.location.href);
   };
 
-  return (
+  return isLoading ? (
+    <LoadingState />
+  ) : (
     <main className="flex flex-1 flex-col gap-6 items-center justify-center px-4 py-8">
       <div className="animate-slot-reveal flex flex-col gap-2 items-center">
         <div className="flex gap-2 items-center">
@@ -45,7 +52,7 @@ export default function Content() {
 
       <ArcadeCard variant="pink">
         <div className="flex flex-col md:flex-row items-center gap-1 md:gap-8">
-          <NFTCard delay={200} id={String(nftIds[0])} imgUrl="TODO" />
+          <NFTCard delay={200} imgUrl={data[0]?.imageUrl} tokenId={String(matchIds![0])} />
 
           <div className="flex flex-col items-center py-4">
             <div
@@ -69,7 +76,7 @@ export default function Content() {
             </span>
           </div>
 
-          <NFTCard delay={400} id={String(nftIds[1])} imgUrl="TODO" />
+          <NFTCard delay={400} imgUrl={data[1]?.imageUrl} tokenId={String(matchIds![1])} />
         </div>
 
         <div className="border-t border-white/5 flex flex-wrap gap-2 justify-center mt-6 pt-6">
@@ -77,7 +84,7 @@ export default function Content() {
 
           <Sticker variant="cyan" text={t(($) => $['content.card.sticker.2'])} />
 
-          <Sticker variant="yellow" text={`#${nftIds[0]} + #${nftIds[1]}`} />
+          <Sticker variant="yellow" text={`#${matchIds![0]} + #${matchIds![1]}`} />
         </div>
       </ArcadeCard>
 
@@ -102,12 +109,12 @@ export default function Content() {
 
         <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="green">
           <ExternalLinkIcon className="w-4 h-4" />
-          {t(($) => $['content.action_btn.open_external_link'])} #{nftIds[0]}
+          {t(($) => $['content.action_btn.open_external_link'])} #{matchIds![0]}
         </NeonButton>
 
         <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="pink">
           <ExternalLinkIcon className="w-4 h-4" />
-          {t(($) => $['content.action_btn.open_external_link'])} #{nftIds[1]}
+          {t(($) => $['content.action_btn.open_external_link'])} #{matchIds![1]}
         </NeonButton>
       </div>
 

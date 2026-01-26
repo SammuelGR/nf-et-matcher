@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useSearchParams } from 'react-router';
 
 export default function useMatchUrl() {
@@ -7,15 +8,15 @@ export default function useMatchUrl() {
     const payload = JSON.stringify({ a: id1, b: id2 });
 
     try {
-      return btoa(payload);
+      return encodeURIComponent(btoa(payload));
     } catch {
       return '';
     }
   };
 
-  const getIdsFromUrl = () => {
-    const hash = searchParams.get('q');
+  const hash = searchParams.get('q');
 
+  const matchIds = useMemo(() => {
     if (!hash) return null;
 
     try {
@@ -26,14 +27,14 @@ export default function useMatchUrl() {
         return null;
       }
 
-      return { id1: parsed.a, id2: parsed.b };
+      return [Number.parseInt(parsed.a), Number.parseInt(parsed.b)];
     } catch {
       return null;
     }
-  };
+  }, [hash]);
 
   return {
     generateHash,
-    matchIds: getIdsFromUrl(),
+    matchIds,
   };
 }

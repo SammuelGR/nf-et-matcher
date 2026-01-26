@@ -1,10 +1,11 @@
 import { ArrowLeft as ArrowLeftIcon, RefreshCw as RefreshCwIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useSearchParams } from 'react-router';
+import { useNavigate } from 'react-router';
 
 import NeonButton from '@/components/NeonButton';
 import useCollectionStats from '@/hooks/useCollectionStats';
 import useMatchUrl from '@/hooks/useMatchUrl';
+import useNftImages from '@/hooks/useNftImages';
 import { PATHS } from '@/routes/paths';
 
 export default function Header() {
@@ -12,9 +13,11 @@ export default function Header() {
 
   const { t } = useTranslation('match');
 
-  const [, setSearchParams] = useSearchParams();
+  const { matchIds } = useMatchUrl();
 
-  const { isLoading, lastMintedId } = useCollectionStats();
+  const { isLoading: isNftImagesLoading } = useNftImages(matchIds || []);
+
+  const { isLoading: isCollectionStatsLoading, lastMintedId } = useCollectionStats();
 
   const { generateHash } = useMatchUrl();
 
@@ -27,7 +30,7 @@ export default function Header() {
 
     const hashedUrl = generateHash(idA, idB);
 
-    setSearchParams({ q: hashedUrl });
+    navigate(`${PATHS.MATCH}?q=${hashedUrl}`);
   };
 
   return (
@@ -42,7 +45,12 @@ export default function Header() {
         {t(($) => $['header.title.2'])}
       </h1>
 
-      <NeonButton isLoading={isLoading} onClick={newMatchClickHandler} size="sm" variant="cyan">
+      <NeonButton
+        isLoading={isCollectionStatsLoading || isNftImagesLoading}
+        onClick={newMatchClickHandler}
+        size="sm"
+        variant="cyan"
+      >
         <RefreshCwIcon className="w-4 h-4" />
         {t(($) => $['header.btn_new_match'])}
       </NeonButton>
