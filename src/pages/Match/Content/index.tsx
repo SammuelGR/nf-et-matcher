@@ -8,6 +8,7 @@ import ArcadeCard from '@/components/ArcadeCard';
 import NeonButton from '@/components/NeonButton';
 import Sticker from '@/components/Sticker';
 import { rules } from '@/constants/breakpoints';
+import { URLS } from '@/constants/urls';
 import useClipboard from '@/hooks/useClipboard';
 import useMatchUrl from '@/hooks/useMatchUrl';
 import useMediaQuery from '@/hooks/useMediaQuery';
@@ -107,15 +108,19 @@ export default function Content() {
           {t(($) => $['content.action_btn.download'])}
         </NeonButton>
 
-        <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="green">
-          <ExternalLinkIcon className="w-4 h-4" />
-          {t(($) => $['content.action_btn.open_external_link'])} #{matchIds![0]}
-        </NeonButton>
+        <a href={`${URLS.openSeaNftDetails}/${matchIds![0]}`} rel="noopener noreferrer" tabIndex={-1} target="_blank">
+          <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="green">
+            <ExternalLinkIcon className="w-4 h-4" />
+            {t(($) => $['content.action_btn.open_external_link'])} #{matchIds![0]}
+          </NeonButton>
+        </a>
 
-        <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="pink">
-          <ExternalLinkIcon className="w-4 h-4" />
-          {t(($) => $['content.action_btn.open_external_link'])} #{matchIds![1]}
-        </NeonButton>
+        <a href={`${URLS.openSeaNftDetails}/${matchIds![1]}`} rel="noopener noreferrer" tabIndex={-1} target="_blank">
+          <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="pink">
+            <ExternalLinkIcon className="w-4 h-4" />
+            {t(($) => $['content.action_btn.open_external_link'])} #{matchIds![1]}
+          </NeonButton>
+        </a>
       </div>
 
       <div className="pt-4 space-y-1 text-center">
