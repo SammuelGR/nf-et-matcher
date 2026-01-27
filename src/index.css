@@ -125,6 +125,15 @@
     border-color: hsl(var(--neon-green) / 0.6);
   }
 
+  .neon-border-green-xl {
+    box-shadow:
+      0 0 10px hsl(var(--neon-green) / 0.5),
+      0 0 45px hsl(var(--neon-green) / 0.3),
+      0 0 60px hsl(var(--neon-green) / 0.2),
+      inset 0 0 20px hsl(var(--neon-green) / 0.1);
+    border-color: hsl(var(--neon-green) / 0.6);
+  }
+
   .neon-border-pink {
     box-shadow:
       0 0 5px hsl(var(--neon-pink) / 0.5),
@@ -140,6 +149,15 @@
       0 0 15px hsl(var(--neon-purple) / 0.3),
       0 0 30px hsl(var(--neon-purple) / 0.2),
       inset 0 0 10px hsl(var(--neon-purple) / 0.1);
+    border-color: hsl(var(--neon-purple) / 0.6);
+  }
+
+  .neon-border-purple-xl {
+    box-shadow:
+      0 0 10px hsl(var(--neon-purple) / 0.5),
+      0 0 45px hsl(var(--neon-purple) / 0.3),
+      0 0 60px hsl(var(--neon-purple) / 0.2),
+      inset 0 0 20px hsl(var(--neon-purple) / 0.1);
     border-color: hsl(var(--neon-purple) / 0.6);
   }
 
@@ -166,6 +184,14 @@
       0 0 10px hsl(var(--neon-green)),
       0 0 20px hsl(var(--neon-green)),
       0 0 40px hsl(var(--neon-green) / 0.5);
+  }
+
+  .neon-text-green-xl {
+    text-shadow:
+      0 0 10px hsl(var(--neon-green)),
+      0 0 20px hsl(var(--neon-green)),
+      0 0 40px hsl(var(--neon-green)),
+      0 0 80px hsl(var(--neon-green));
   }
 
   .neon-text-pink {

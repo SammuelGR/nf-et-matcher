@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import Sticker from '@/components/Sticker';
+import { URLS } from '@/constants/urls';
 import { cn } from '@/utils/cn';
 
 interface NFTCardProps {
@@ -12,8 +13,6 @@ interface NFTCardProps {
 export default function NFTCard({ delay, imgUrl, tokenId }: NFTCardProps) {
   const { t } = useTranslation('match');
 
-  const imgUrlPlaceholder = `https://placehold.co/400x400/1a1a2e/39ff14?text=NFET%23${tokenId}`;
-
   return (
     <div
       className="animate-slot-reveal border-2 border-highlight/40 flex-1 group w-54 md:w-70 neon-border-green overflow-hidden relative rounded-xl"
@@ -21,7 +20,7 @@ export default function NFTCard({ delay, imgUrl, tokenId }: NFTCardProps) {
     >
       <div className="aspect-square bg-card/80 overflow-hidden">
         <img
-          src={imgUrl || imgUrlPlaceholder}
+          src={imgUrl || URLS.imgUrlPlaceholder(tokenId)}
           alt={`${t(($) => $['content.nft_card.img_alt'])} #${tokenId}`}
           className="duration-500 group-hover:scale-115 h-full object-center object-cover transition-transform scale-105 w-full"
         />

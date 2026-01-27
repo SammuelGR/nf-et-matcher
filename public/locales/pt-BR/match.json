@@ -21,5 +21,14 @@
   "loading_state.message.2": "Decidindo entre A, B ou C",
   "loading_state.message.3": "Calibrando algoritmo da nave",
   "loading_state.message.4": "Consultando oráculo alienígena",
-  "loading_state.message.5": "Verificando com os caras lá"
+  "loading_state.message.5": "Verificando com os caras lá",
+  "share_card.content.img_alt": "Defizero",
+  "share_card.content.match": "Match",
+  "share_card.content.sticker.1": "Bullish",
+  "share_card.content.sticker.2": "Alien mode",
+  "share_card.footer.subtitle": "Defizeros Edition",
+  "share_card.footer.title.1": "NF_ET",
+  "share_card.footer.title.2": "inder",
+  "share_card.header.sticker": "Defizeros",
+  "share_card.header.title": "Match Detectado!"
 }
