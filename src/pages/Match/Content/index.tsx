@@ -37,7 +37,10 @@ export default function Content() {
 
   const { isCopied, writeToClipboard } = useClipboard();
 
-  const compatibility = calculateCompatibility(matchIds?.[0] || 0, matchIds?.[1] || 0);
+  const nftLeft = { id: matchIds?.[0] || 0, imgUrl: data[0]?.imageUrl };
+  const nftRight = { id: matchIds?.[1] || 1, imgUrl: data[1]?.imageUrl };
+
+  const compatibility = calculateCompatibility(nftLeft.id, nftRight.id);
 
   const downloadCardClickHandler = useCallback(async () => {
     if (shareCardRef.current === null) return;
@@ -51,7 +54,7 @@ export default function Content() {
       });
 
       const link = document.createElement('a');
-      link.download = `match-nfet-${matchIds?.[0]}-vs-${matchIds?.[1]}.png`;
+      link.download = `match-nfet-${nftLeft.id}-vs-${nftRight.id}.png`;
       link.href = dataUrl;
       link.click();
     } catch {
@@ -59,7 +62,7 @@ export default function Content() {
     } finally {
       setIsDownloadingCard(false);
     }
-  }, [matchIds]);
+  }, [nftLeft.id, nftRight.id]);
 
   const copyLinkClickHandler = () => {
     writeToClipboard(globalThis.window.location.href);
@@ -71,11 +74,7 @@ export default function Content() {
     <>
       <div aria-hidden={true} className="fixed -left-2000 opacity-0 pointer-events-none -z-10">
         <div ref={shareCardRef}>
-          <ShareCard
-            compatibility={compatibility}
-            nftLeft={{ id: matchIds![0], imgUrl: data[0]?.imageUrl }}
-            nftRight={{ id: matchIds![1], imgUrl: data[1]?.imageUrl }}
-          />
+          <ShareCard compatibility={compatibility} nftLeft={nftLeft} nftRight={nftRight} />
         </div>
       </div>
 
@@ -96,7 +95,7 @@ export default function Content() {
 
         <ArcadeCard variant="pink">
           <div className="flex flex-col md:flex-row items-center gap-1 md:gap-8">
-            <NFTCard delay={200} imgUrl={data[0]?.imageUrl} tokenId={String(matchIds![0])} />
+            <NFTCard delay={200} imgUrl={nftLeft.imgUrl} tokenId={String(nftLeft.id)} />
 
             <div className="flex flex-col items-center py-4">
               <div
@@ -117,7 +116,7 @@ export default function Content() {
               <span className="font-black neon-text-cyan text-2xl text-accent">{compatibility}%</span>
             </div>
 
-            <NFTCard delay={400} imgUrl={data[1]?.imageUrl} tokenId={String(matchIds![1])} />
+            <NFTCard delay={400} imgUrl={nftRight.imgUrl} tokenId={String(nftRight.id)} />
           </div>
 
           <div className="border-t border-white/5 flex flex-wrap gap-2 justify-center mt-6 pt-6">
@@ -125,7 +124,7 @@ export default function Content() {
 
             <Sticker variant="cyan" text={t(($) => $['content.card.sticker.2'])} />
 
-            <Sticker variant="yellow" text={`#${matchIds![0]} + #${matchIds![1]}`} />
+            <Sticker variant="yellow" text={`#${nftLeft.id} + #${nftRight.id}`} />
           </div>
         </ArcadeCard>
 
@@ -154,17 +153,17 @@ export default function Content() {
             {t(($) => $['content.action_btn.download'])}
           </NeonButton>
 
-          <a href={`${URLS.openSeaNftDetails}/${matchIds![0]}`} rel="noopener noreferrer" tabIndex={-1} target="_blank">
+          <a href={`${URLS.openSeaNftDetails}/${nftLeft.id}`} rel="noopener noreferrer" tabIndex={-1} target="_blank">
             <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="green">
               <ExternalLinkIcon className="w-4 h-4" />
-              {t(($) => $['content.action_btn.open_external_link'])} #{matchIds![0]}
+              {t(($) => $['content.action_btn.open_external_link'])} #{nftLeft.id}
             </NeonButton>
           </a>
 
-          <a href={`${URLS.openSeaNftDetails}/${matchIds![1]}`} rel="noopener noreferrer" tabIndex={-1} target="_blank">
+          <a href={`${URLS.openSeaNftDetails}/${nftRight.id}`} rel="noopener noreferrer" tabIndex={-1} target="_blank">
             <NeonButton className="w-full sm:w-auto" size={isMd ? 'md' : 'sm'} variant="pink">
               <ExternalLinkIcon className="w-4 h-4" />
-              {t(($) => $['content.action_btn.open_external_link'])} #{matchIds![1]}
+              {t(($) => $['content.action_btn.open_external_link'])} #{nftRight.id}
             </NeonButton>
           </a>
         </div>
