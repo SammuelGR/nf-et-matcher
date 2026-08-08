@@ -12,6 +12,7 @@ export default function useCollectionStats() {
     abi: DEFIZEROS_ABI,
     functionName: 'totalSupply',
     query: {
+      retry: false,
       staleTime: Infinity,
     },
   });

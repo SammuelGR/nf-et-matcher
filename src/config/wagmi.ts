@@ -6,6 +6,10 @@ const RPC_URL = import.meta.env.VITE_PUBLIC_RPC_URL;
 export const config = createConfig({
   chains: [mainnet],
   transports: {
-    [mainnet.id]: http(RPC_URL),
+    [mainnet.id]: http(RPC_URL, {
+      retryCount: 1,
+      retryDelay: 250,
+      timeout: 5_000,
+    }),
   },
 });
