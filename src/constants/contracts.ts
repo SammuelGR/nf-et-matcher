@@ -17,4 +17,4 @@ export const DEFIZEROS_ABI = [
   },
 ] as const;
 
-export const DEFIZEROS_MAX_SUPPLY = 4200;
+export const DEFIZEROS_MAX_SUPPLY = 420;
