@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const DEFIZEROS_ADDRESS = '0xa74c0b5adea01df5a43a6c6b5e012dc8ed5d2687';
 
-async function fetchNftImageUrl(id: string, apiKey: string): Promise<{ imageUrl: string }> {
+async function fetchNftImageUrl(id: string, apiKey: string): Promise<string> {
   const endpoint = `https://eth-mainnet.g.alchemy.com/nft/v3/${apiKey}/getNFTMetadata`;
   const url = `${endpoint}?contractAddress=${DEFIZEROS_ADDRESS}&tokenId=${id}`;
 
@@ -13,13 +13,31 @@ async function fetchNftImageUrl(id: string, apiKey: string): Promise<{ imageUrl:
   }
 
   const data = await response.json();
-  const imageUrl = data.image?.cachedUrl || data.image?.originalUrl || data.tokenUri;
+  const imageUrl = data.image?.cachedUrl || data.image?.pngUrl || data.image?.originalUrl;
 
   if (!imageUrl) {
     throw new Error('Image not found in metadata');
   }
 
-  return { imageUrl };
+  return imageUrl;
+}
+
+async function fetchNftImage(imageUrl: string): Promise<{ contentType: string; image: Buffer }> {
+  const response = await fetch(imageUrl);
+
+  if (!response.ok) {
+    throw new Error(`Alchemy image error: ${response.statusText}`);
+  }
+
+  const contentType = response.headers.get('content-type');
+
+  if (!contentType?.startsWith('image/')) {
+    throw new Error('Invalid image content type');
+  }
+
+  const image = Buffer.from(await response.arrayBuffer());
+
+  return { contentType, image };
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -36,9 +54,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const data = await fetchNftImageUrl(id, apiKey);
+    const imageUrl = await fetchNftImageUrl(id, apiKey);
+    const { contentType, image } = await fetchNftImage(imageUrl);
 
-    return res.status(200).json(data);
+    res.setHeader('Content-Type', contentType);
+
+    return res.status(200).send(image);
   } catch (error) {
     console.error('Failed to fetch NFT data:', error);
 
